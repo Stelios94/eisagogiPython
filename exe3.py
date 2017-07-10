@@ -5,12 +5,13 @@ import time
 from Tkinter import Tk
 from tkFileDialog import askopenfilename
 
-Tk().withdraw()                  # Αυτές οι 2 εντολές χρησιμοποιούνται ώστε ο χρήστης να επιλέξει ένα αρχείο και από αυτό επιστρέφεται το 
-filename = askopenfilename()     # path του.To αρχείο όμως που θα επιλεχθεί πρέπει να βρίσκεται στον ίδιο φάκελο με το εκτελέσιμο exe3.py γιατι αλλιώς εμφανίζεται error.Πιο συγκεκριμένα υπάρχει κάποιο πρόβλημα με τα path και τα αρχεία δεν γίνονται post αν βρίσκονται σε κάποιο άλλο φάκελο
+#Tk().withdraw()                   Αυτές οι 2 εντολές χρησιμοποιούνται ώστε ο χρήστης να επιλέξει ένα αρχείο και από αυτό επιστρέφεται το
+#filename = askopenfilename()      path του.Οι εντολές όμως δεν χρησιμοποιούνται γιατι αν επιλέξουμε ένα αρχείο από διαφορετικό φάκελο ##                                 από το εκτελέσιμο ή κατεβάσουμε το εκτελέσιμο από git repository επιστρέφεται NoneType και όχι json.
 
 
 params= {'apikey':'6e2757fe11a35a931cf09308b522bbeb9fc18ab81e377209add3b9b380b93721'}     #apikey που πηραμε με την εγγραφή στη σελίδα virustotal.com
-files = {'file': (''+filename+'', open(''+filename+'', 'rb'))}  #το αρχείο που θέλουμε να στείλουμε για ανάλυση
+#files = {'file': (''+filename+'', open(''+filename+'', 'rb'))}   ετσι θα ήταν η εντολη αν επιλεγαμε αρχειο
+files = {'file': ('readmme.txt', open('readme.txt', 'rb'))}  #το αρχείο που θέλουμε να στείλουμε για ανάλυση
 response = requests.post('https://www.virustotal.com/vtapi/v2/file/scan', files=files, params=params)  #στέλνουμε το αρχείο για scan
 json_obj = response.json()                                                            #η απαντηση στο παραπάνω request
 resource=json_obj.get('resource')                                                     #παίρνουμε τη τιμή του tag resource απ'το json
